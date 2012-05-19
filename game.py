@@ -50,13 +50,13 @@ def show_table():
 		return x
 
 	positions_marked = map(mark_positions, positions)
-
+	
 	print '    A       B       C    '
-	print '1   %s  |   %s  |   %s   ' % (positions_marked[0], positions_marked[1], positions_marked[2])
+	print '1   %s  |   %s  |   %s   ' % (positions_marked[0], positions_marked[3], positions_marked[8])
 	print '-------------------------'
-	print '2   %s  |   %s  |   %s   ' % (positions_marked[3], positions_marked[4], positions_marked[5])
+	print '2   %s  |   %s  |   %s   ' % (positions_marked[2], positions_marked[4], positions_marked[7])
 	print '-------------------------'
-	print '3   %s  |   %s  |   %s   ' % (positions_marked[8], positions_marked[7], positions_marked[6])
+	print '3   %s  |   %s  |   %s   ' % (positions_marked[1], positions_marked[5], positions_marked[6])
 
 def start_game():
 	select_option()
@@ -130,25 +130,16 @@ def find_winer():
 	combination_six = ['a3', 'b3', 'c3']
 	combination_seven = ['a1', 'b2', 'c3']
 	combination_eight = ['a3', 'b2', 'c1']
+	all_combinations = [combination_one, combination_two, combination_three, combination_four,\
+	 				    combination_five, combination_six, combination_seven, combination_eight]
 	name_winner = None
-
-	is_player_one_winner = set(combination_one) == set(positions_player_one).intersection(combination_one) or\
-					       set(combination_two) == set(positions_player_one).intersection(combination_two) or\
-				           set(combination_three) == set(positions_player_one).intersection(combination_three) or\
-					       set(combination_four) == set(positions_player_one).intersection(combination_four) or\
-					       set(combination_five) == set(positions_player_one).intersection(combination_five) or\
-					       set(combination_six) == set(positions_player_one).intersection(combination_six) or\
-					       set(combination_seven) == set(positions_player_one).intersection(combination_seven) or\
-					       set(combination_eight) == set(positions_player_one).intersection(combination_eight)
-				
-	is_player_two_winner = set(combination_one) == set(positions_player_two).intersection(combination_one) or\
-						   set(combination_two) == set(positions_player_two).intersection(combination_two) or\
-				           set(combination_three) == set(positions_player_two).intersection(combination_three) or\
-					       set(combination_four) == set(positions_player_two).intersection(combination_four) or\
-					       set(combination_five) == set(positions_player_two).intersection(combination_five) or\
-					       set(combination_six) == set(positions_player_two).intersection(combination_six) or\
-					       set(combination_seven) == set(positions_player_two).intersection(combination_seven) or\
-					       set(combination_eight) == set(positions_player_two).intersection(combination_eight)
+	
+	for combination in all_combinations:
+		is_player_one_winner = set(combination) == set(positions_player_one).intersection(combination)
+		is_player_two_winner = set(combination) == set(positions_player_two).intersection(combination)
+		
+		if is_player_one_winner or is_player_two_winner:
+			break
 	
 	if is_player_one_winner:
 		name_winner = name_player_one
